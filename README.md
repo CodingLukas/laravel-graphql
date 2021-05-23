@@ -132,3 +132,18 @@ Authorization:
 "Authorization": "Bearer 8SfnCuGzHpllvcTIR7PNYNS6p2qrjp14SNhfFBb1xa8L9ki6LoJAdecHYVTv"
 }
 ```  
+
+Create user
+```graphql
+mutation {
+  createUser(
+    name: "lol"
+    email: "testd@gmail.com"
+    password: "secret"
+  ) {
+    id
+    email
+  }
+}
+
+```

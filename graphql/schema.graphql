@@ -1,10 +1,23 @@
 type Mutation{
-    login(email: String!, password: String!): String @field(resolver: "AuthMutator@login")
+    login(email: String!, password: String!): String
+    @field(resolver: "AuthMutator@login")
+    createUser(
+        name: String!
+        email: String! @rules(apply: ["email", "unique:users"])
+        password: String! @hash
+        #    ): User @field(resolver: "UserMutator@create")
+    ): CreateUserPayload @field(resolver: "UserMutator@create")
+
+}
+
+type CreateUserPayload {
+    user: User
+    token: String
 }
 
 type Query {
     me: User @auth(guard: "api")
-#    @field(resolver: "UserQuery@me")
+    #    @field(resolver: "UserQuery@me")
     #    @paginate(defaultCount: 10)
     #    User @find
     users(page: Int = 1, count: Int = 15): [User!]!
@@ -13,7 +26,7 @@ type Query {
     user(id: ID! @eq): User @find
     jobsByStatus(status: JobStatus! @builder(method: "App\\Models\\Job@byStatus")
     ): [Job!]! @paginate
-#        @field(resolver: "JobQuery@byStatus")
+    #        @field(resolver: "JobQuery@byStatus")
 }
 
 type User {
@@ -21,7 +34,7 @@ type User {
     name: String!
     email: String!
     jobs(status: JobStatus): [Job!]!
-        @hasMany(type: "paginator", scopes: ["ofUserType"])
+    @hasMany(type: "paginator", scopes: ["ofUserType"])
 }
 
 type Job {
