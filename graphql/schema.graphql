@@ -1,7 +1,9 @@
 type Query {
-#    @paginate(defaultCount: 10)
-#    User @find
-    users: [User!]! @all
+    #    @paginate(defaultCount: 10)
+    #    User @find
+    users(page: Int = 1, count: Int = 15): [User!]!
+    @paginate
+    #        @field(resolver: "UserQuery@paginate")
     user(id: ID! @eq): User @find
 }
 
@@ -9,7 +11,7 @@ type User {
     id: ID!
     name: String!
     email: String!
-    jobs: [Job!]! @hasMany
+    jobs: [Job!]! @hasMany(type: "paginator")
 }
 
 type Job {
