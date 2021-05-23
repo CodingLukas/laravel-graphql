@@ -149,6 +149,22 @@ mutation {
 
 ```
 
+```graphql
+mutation {
+    createUser(
+        name: "lol"
+        email: "test3@gmail.com"
+        password: "secret"
+    ) {
+        user {
+            id
+            email
+        }
+        token
+    }
+}
+```
+
 ```php
 DB::listen(function($executed){
  info($executed->sql);
