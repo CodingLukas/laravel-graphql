@@ -9,4 +9,11 @@ type User {
     id: ID!
     name: String!
     email: String!
+    jobs: [Job!]! @hasMany
+}
+
+type Job {
+    id: ID!
+    title: String!
+
 }
