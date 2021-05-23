@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Job;
+use App\Models\User;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
 
 class JobSeeder extends Seeder
@@ -13,12 +16,12 @@ class JobSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Job::truncate();
-        \App\Models\Job::unguard();
+        Job::truncate();
+        Job::unguard();
 
-        $faker = \Faker\Factory::create();
+        $faker = Factory::create();
 
-        \App\Models\User::all()->each(function ($user) use ($faker) {
+        User::all()->each(function ($user) use ($faker) {
             foreach (range(1, 5) as $i) {
                 $status = "QUEUED";
 
@@ -28,7 +31,7 @@ class JobSeeder extends Seeder
                     $status = 'COMPLETE';
                 }
 
-                \App\Models\Job::create([
+                Job::create([
                     'user_id' => $user->getKey(),
                     'title' => $faker->sentence,
                     'status' => $status

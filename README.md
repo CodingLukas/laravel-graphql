@@ -107,4 +107,28 @@ Filtering
 
 
 ```
-  
+
+```graphql
+mutation{
+	login(email:"john@gmail.com", password: "password")
+}
+```  
+
+```graphql
+{
+    me {
+        name,
+        email
+        jobs(first: 10, status:QUEUED){
+            data{
+                title
+            }
+        }
+    }
+}
+
+Authorization:
+{
+"Authorization": "Bearer 8SfnCuGzHpllvcTIR7PNYNS6p2qrjp14SNhfFBb1xa8L9ki6LoJAdecHYVTv"
+}
+```  

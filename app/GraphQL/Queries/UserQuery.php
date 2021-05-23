@@ -4,6 +4,8 @@
 namespace App\GraphQL\Queries;
 
 
+use Illuminate\Support\Facades\Auth;
+
 class UserQuery
 {
     public function paginate($root, array $args)
@@ -14,5 +16,10 @@ class UserQuery
             'page',
             $args['page']
         );
+    }
+
+    public function me()
+    {
+        return Auth::guard('api')->user();
     }
 }
