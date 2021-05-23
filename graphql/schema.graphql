@@ -1,6 +1,8 @@
 type Query {
-    users: [User!]! @paginate(defaultCount: 10)
-    user(id: ID @eq): User @find
+#    @paginate(defaultCount: 10)
+#    User @find
+    users: [User!]! @all
+    user(id: ID! @eq): User @find
 }
 
 type User {
