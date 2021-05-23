@@ -20,9 +20,18 @@ class JobSeeder extends Seeder
 
         \App\Models\User::all()->each(function ($user) use ($faker) {
             foreach (range(1, 5) as $i) {
+                $status = "QUEUED";
+
+                if($i == 4){
+                    $status = 'PROCESSING';
+                }elseif ($i == 5){
+                    $status = 'COMPLETE';
+                }
+
                 \App\Models\Job::create([
                     'user_id' => $user->getKey(),
-                    'title' => $faker->sentence
+                    'title' => $faker->sentence,
+                    'status' => $status
                 ]);
             }
         });

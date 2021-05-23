@@ -41,7 +41,70 @@ All users with jobs:
 }
 
 ```
+
 @eq = Model::where('id', ' $id)->first()
 
+Relationships with Paginator:
 
+```graphql
+{
+    users(count: 3, page: 1, first: 1) {
+        paginatorInfo{
+            total
+        }
+        data{
+            id
+            email
+            jobs(first: 1) {
+                paginatorInfo{
+                    total
+                }
+                data{
+                    title
+                }
+            }
+        }
+
+    }
+}
+```
+
+Filtering
+
+```graphql
+{
+    jobsByStatus(status: PROCESSING){
+        title
+        status
+        user{
+            name
+        }
+    }
+}
+
+{
+    jobsByStatus(status: PROCESSING, first: 3) {
+        data {
+            title
+            status
+            user {
+                name
+            }
+        }
+    }
+}
+
+{
+    user(id: 1){
+        jobs(status: COMPLETE, first: 4){
+            data{
+                status
+                title
+            }
+        }
+    }
+}
+
+
+```
   
