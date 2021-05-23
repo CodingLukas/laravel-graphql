@@ -110,7 +110,7 @@ Filtering
 
 ```graphql
 mutation{
-	login(email:"john@gmail.com", password: "password")
+    login(email:"john@gmail.com", password: "password")
 }
 ```  
 
@@ -134,16 +134,23 @@ Authorization:
 ```  
 
 Create user
+
 ```graphql
 mutation {
-  createUser(
-    name: "lol"
-    email: "testd@gmail.com"
-    password: "secret"
-  ) {
-    id
-    email
-  }
+    createUser(
+        name: "lol"
+        email: "testd@gmail.com"
+        password: "secret"
+    ) {
+        id
+        email
+    }
 }
 
+```
+
+```php
+DB::listen(function($executed){
+ info($executed->sql);
+});
 ```
